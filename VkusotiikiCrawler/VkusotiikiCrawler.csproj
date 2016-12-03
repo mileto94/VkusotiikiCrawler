@@ -79,10 +79,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ingredient.cs" />
+    <Compile Include="RecipeData\Ingredient.cs" />
+    <Compile Include="Interfaces\IRecipeWebsite.cs" />
+    <Compile Include="Utilities\JSONManager.cs" />
+    <Compile Include="RecipeWebsites\KulinarBg.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recipe.cs" />
+    <Compile Include="RecipeWebsites\ReceptiGotvachBg.cs" />
+    <Compile Include="RecipeWebsites\ReceptiteBg.cs" />
+    <Compile Include="RecipeData\Recipe.cs" />
+    <Compile Include="Utilities\VkusotiikiCrawler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
