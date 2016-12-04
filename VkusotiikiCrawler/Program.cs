@@ -30,29 +30,15 @@ namespace VkusotiikiCrawler
             IRecipeWebsite recipeWebsite = new KulinarBg();
             manager = new JSONManager(JSON_FILE_PATH);
             Recipes = manager.ReadRecipes();
-            FindRecipeWithAlergies();
             crawler = new VkusotiikiCrawler(recipeWebsite, Recipes);
             crawler.InitiateCrawler();
             crawler.StartCrawler();
-            manager.WriteRecipes(Recipes);
-        }
-
-        public static void FindRecipeWithAlergies()
-        {
-            foreach (var recipe in Recipes)
+            foreach (var item in Recipes)
             {
-                foreach (var item in recipe.Ingredients)
-                {
-                    foreach (var alergy in Recipe.ALERGIES)
-                    {
-                        if (item.Name.StartsWith(alergy))
-                        {
-                            recipe.IsAlergic = true;
-                            break;
-                        }
-                    }
-                } 
+                item.FindAlergies();
+                item.FindDifficulty();
             }
+            manager.WriteRecipes(Recipes);
         }
     }
 }

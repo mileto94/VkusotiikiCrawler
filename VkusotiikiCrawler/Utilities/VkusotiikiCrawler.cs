@@ -12,7 +12,7 @@ namespace VkusotiikiCrawler
     public class VkusotiikiCrawler
     {
         private string _URLPath;
-        private PoliteWebCrawler _crawler { get; set; }
+        private PoliteWebCrawler _crawler;
         private IRecipeWebsite _recipeWebsite;
         private List<Recipe> _recipes;
 

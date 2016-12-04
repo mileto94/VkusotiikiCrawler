@@ -51,7 +51,8 @@ namespace VkusotiikiCrawler
                 var recipeDurationElement = htmlAgilityPackDocument.DocumentNode.SelectNodes("//span[@class='fs24 bold']")?.First();
                 string recipeDuration = recipeDurationElement?.InnerText.Trim();
 
-
+                var recipeServingsElement = htmlAgilityPackDocument.DocumentNode.SelectNodes("//input[@class='fs24 openSans bold alignCenter colorDef']")?.First();
+                string recipeServings = recipeServingsElement?.GetAttributeValue("value", "1").Trim();
 
                 if (recipes.Where(s => s.Title == recipeName).Count() == 0)
                 {
@@ -63,6 +64,7 @@ namespace VkusotiikiCrawler
                         newRecipe.Ingredients.Add(new Ingredient(item));
                     }
                     newRecipe.Duration = recipeDuration;
+                    newRecipe.Servings = Int32.Parse(recipeServings);
 
                     recipes.Add(newRecipe);
                 }
