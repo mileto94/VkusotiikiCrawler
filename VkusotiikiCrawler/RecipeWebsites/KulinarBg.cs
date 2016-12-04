@@ -9,14 +9,13 @@ namespace VkusotiikiCrawler
 {
     class KulinarBg : IRecipeWebsite
     {
-        private readonly char[] TRIM_CHRACTERS = new char[3] {' ', '\r', '\n' };
         private const string URL_PATH = "http://kulinar.bg/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B0-%D0%9A%D1%83%D1%85%D0%BD%D1%8F-%D1%80%D0%B5%D1%86%D0%B5%D0%BF%D1%82%D0%B8_l.rl_rn.1.html";
 
         public void GetRecipeDataFromHTML(HtmlDocument htmlAgilityPackDocument, List<Recipe> recipes)
         {
             List<string> recipeIngredients = new List<string>();
             var recipeTitleElement = htmlAgilityPackDocument.DocumentNode.SelectNodes("//div[@class='recipeHead']")?.First();
-            string recipeName = recipeTitleElement?.InnerText.TrimEnd(TRIM_CHRACTERS).TrimStart(TRIM_CHRACTERS);
+            string recipeName = recipeTitleElement?.InnerText;
 
             if (recipeName != null)
             {
@@ -39,11 +38,11 @@ namespace VkusotiikiCrawler
                     {
                         if (item.ChildNodes.Count <= 3)
                         {
-                            recipeInstructions += item.ChildNodes[2].InnerText.TrimEnd(TRIM_CHRACTERS).TrimStart(TRIM_CHRACTERS);
+                            recipeInstructions += item.ChildNodes[2].InnerText;
                         }
                         else
                         {
-                            recipeInstructions += item.ChildNodes[3].InnerText.TrimEnd(TRIM_CHRACTERS).TrimStart(TRIM_CHRACTERS);
+                            recipeInstructions += item.ChildNodes[3].InnerText;
                         }
                     }
                 }

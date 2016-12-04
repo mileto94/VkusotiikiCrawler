@@ -9,7 +9,6 @@ namespace VkusotiikiCrawler
 {
     class ReceptiteBg : IRecipeWebsite
     {
-        private readonly char[] TRIM_CHRACTERS = new char[3] { ' ', '\r', '\n' };
         const string URL_PATH = "http://www.receptite.com/%D1%80%D0%B5%D1%86%D0%B5%D0%BF%D1%82%D0%B8-%D0%BE%D1%82/%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B0-%D0%BA%D1%83%D1%85%D0%BD%D1%8F";
 
         public string GetURLPath() => URL_PATH;
@@ -18,7 +17,7 @@ namespace VkusotiikiCrawler
         {
             List<string> recipeIngredients = new List<string>();
             var recipeTitleElement = htmlAgilityPackDocument.DocumentNode.SelectNodes("//div[@class='title_rec_big box_width_min']")?.First();
-            string recipeName = recipeTitleElement?.InnerText.Trim();
+            string recipeName = recipeTitleElement?.InnerText;
 
             if (recipeName != null)
             {
@@ -44,7 +43,6 @@ namespace VkusotiikiCrawler
                 }
 
                 recipes.Add(newRecipe);
-
             }
         }
     }

@@ -95,6 +95,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Recipes\recipes.json" />
+    <None Include="Recipes\recipes_120.json" />
+    <None Include="Recipes\recipes_136.json" />
+    <None Include="Recipes\recipes_160.json" />
+    <None Include="Recipes\recipes_164.json" />
+    <None Include="Recipes\recipes_200.json" />
+    <None Include="Recipes\recipes_217.json" />
+    <None Include="Recipes\recipes_232.json" />
+    <None Include="Recipes\recipes_339.json" />
+    <None Include="Recipes\recipes_380.json" />
+    <None Include="Recipes\recipes_402.json" />
+    <None Include="Recipes\recipes_479.json" />
+    <None Include="Recipes\recipes_99.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
