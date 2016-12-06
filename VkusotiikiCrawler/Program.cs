@@ -36,9 +36,9 @@ namespace VkusotiikiCrawler
             crawler.StartCrawler();
             //foreach (var item in Recipes)
             //{
-            //    item.FindAlergies();
-            //    item.FindDifficulty();
-            //    item.TrimTitle();
+            //    //item.FindAlergies();
+            //    //item.FindDifficulty();
+            //    //item.TrimTitle();
             //}
             manager.WriteRecipes(Recipes);
         }

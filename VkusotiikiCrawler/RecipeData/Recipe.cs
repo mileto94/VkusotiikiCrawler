@@ -11,9 +11,11 @@ namespace VkusotiikiCrawler
     public class Recipe
     {
         //public static readonly char[] TRIM_CHRACTERS = new char[3] { ' ', '\r', '\n' };
-        public readonly static string[] ALERGIES = new string[] {"ядки", "орех", "лешни", "орех", "кашу", "бадем",
-            "кестен", "шам-фъстъ", "соя", "пшени", "500", "мляко", "млечн", "риба", "скумри", "шаран", "рибн",
-            "горчица", "сирене", "кашкавал", "яйц", "целина" };
+        public readonly static string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
+            "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
+        public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
+        "свинско", "суджук", "филе"};
+        public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал" };
 
         [JsonProperty("title")]
         public string Title { get; set; }
@@ -50,13 +52,13 @@ namespace VkusotiikiCrawler
             {
                 foreach (var item in ingredientName.Name.Split(' '))
                 {
-                    foreach (var allergy in ALERGIES)
+                    foreach (var allergy in OTHER_ALERGIES.Concat(MEAT).Concat(DAIRY))
                     {
                         if (item.StartsWith(allergy))
                         {
                             IsAllergic = true;
                             break;
-                        } 
+                        }
                     }
                 }
             }
@@ -97,7 +99,7 @@ namespace VkusotiikiCrawler
                 Regex rgx1 = new Regex(pattern1);
                 Regex rgx2 = new Regex(pattern2);
                 Title = rgx1.Replace(Title, replacement);
-                Title = rgx2.Replace(Title, replacement); 
+                Title = rgx2.Replace(Title, replacement);
             }
         }
     }
