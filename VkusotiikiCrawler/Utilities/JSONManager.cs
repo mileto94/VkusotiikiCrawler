@@ -52,7 +52,10 @@ namespace VkusotiikiCrawler
                 }
 
                 string newJSONFilePath = _JSONFilePath.Remove(_JSONFilePath.Count() - 5) + "_" + recipes.Count() + ".json";
-                File.Copy(_JSONFilePath, newJSONFilePath);
+                if (!File.Exists(newJSONFilePath))
+                {
+                    File.Copy(_JSONFilePath, newJSONFilePath);
+                }
             }
             catch (Exception ex)
             {

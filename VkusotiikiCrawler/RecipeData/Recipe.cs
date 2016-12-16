@@ -16,6 +16,7 @@ namespace VkusotiikiCrawler
         public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
         "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюште"};
         public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
+        public readonly static string[] FORBIDDEN_TITLES = new string[] { "италиан", "турск", "индий", "паста", "спагети", "палачинк"};
 
         [JsonProperty("title")]
         public string Title { get; set; }
