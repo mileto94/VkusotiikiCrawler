@@ -11,16 +11,40 @@ namespace VkusotiikiCrawler
 {
     public class VkusotiikiCrawler
     {
+        public const string JSON_FILE_PATH = @"../../Recipes/recipes.json";
+
+        public List<Recipe> Recipes { get; set; }
+
         private string _URLPath;
         private PoliteWebCrawler _crawler;
         private IRecipeWebsite _recipeWebsite;
-        private List<Recipe> _recipes;
 
-        public VkusotiikiCrawler(IRecipeWebsite recipeWebsite, List<Recipe> recipes)
+        public VkusotiikiCrawler(IRecipeWebsite recipeWebsite)
         {
             _recipeWebsite = recipeWebsite;
             _URLPath = recipeWebsite.GetURLPath();
-            _recipes = recipes;
+            Recipes = new List<Recipe>();
+        }
+
+        public void RunCrawler(int recipesCount)
+        {
+            while (Recipes.Count <= recipesCount)
+            {
+                RunCrawler();
+            }
+        }
+
+        public void RunCrawler()
+        {
+            int initialRecipesCount = Recipes.Count();
+            JSONManager manager = new JSONManager(JSON_FILE_PATH);
+            Recipes = manager.ReadRecipes();
+            InitiateCrawler();
+            StartCrawler();
+            if (initialRecipesCount != Recipes.Count())
+            {
+                manager.WriteRecipes(Recipes);
+            }
         }
 
         public void StartCrawler()
@@ -34,7 +58,7 @@ namespace VkusotiikiCrawler
                 Console.WriteLine("Crawl of {0} completed without error.", result.RootUri.AbsoluteUri);
         }
 
-        public void InitiateCrawler()
+        private void InitiateCrawler()
         {
             CrawlConfiguration crawlConfig = new CrawlConfiguration();
             crawlConfig.CrawlTimeoutSeconds = 100;
@@ -72,7 +96,7 @@ namespace VkusotiikiCrawler
             var htmlAgilityPackDocument = crawledPage.HtmlDocument; //Html Agility Pack parser
             var angleSharpHtmlDocument = crawledPage.AngleSharpHtmlDocument; //AngleSharp parser
 
-            _recipeWebsite.GetRecipeDataFromHTML(htmlAgilityPackDocument, _recipes);
+            _recipeWebsite.GetRecipeDataFromHTML(htmlAgilityPackDocument, Recipes);
             //ReceptiteBg(htmlAgilityPackDocument);
             //ReceptiteGotvachBg(htmlAgilityPackDocument);
 

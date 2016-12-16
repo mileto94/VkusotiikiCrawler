@@ -95,19 +95,31 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Recipes\old1\recipes_120.json" />
+    <None Include="Recipes\old1\recipes_136.json" />
+    <None Include="Recipes\old1\recipes_160.json" />
+    <None Include="Recipes\old1\recipes_164.json" />
+    <None Include="Recipes\old1\recipes_200.json" />
+    <None Include="Recipes\old1\recipes_217.json" />
+    <None Include="Recipes\old1\recipes_232.json" />
+    <None Include="Recipes\old1\recipes_339.json" />
+    <None Include="Recipes\old1\recipes_380.json" />
+    <None Include="Recipes\old1\recipes_402.json" />
+    <None Include="Recipes\old1\recipes_479.json" />
+    <None Include="Recipes\old1\recipes_533.json" />
+    <None Include="Recipes\old1\recipes_600.json" />
+    <None Include="Recipes\old1\recipes_600_refined.json" />
+    <None Include="Recipes\old1\recipes_99.json" />
+    <None Include="Recipes\old2\recipes_193.json" />
+    <None Include="Recipes\old2\recipes_244.json" />
+    <None Include="Recipes\old2\recipes_300.json" />
+    <None Include="Recipes\old2\recipes_376.json" />
+    <None Include="Recipes\old2\recipes_409.json" />
+    <None Include="Recipes\old2\recipes_512.json" />
+    <None Include="Recipes\old2\recipes_551.json" />
+    <None Include="Recipes\old2\recipes_618.json" />
+    <None Include="Recipes\old2\recipes_618_refined.json" />
     <None Include="Recipes\recipes.json" />
-    <None Include="Recipes\recipes_120.json" />
-    <None Include="Recipes\recipes_136.json" />
-    <None Include="Recipes\recipes_160.json" />
-    <None Include="Recipes\recipes_164.json" />
-    <None Include="Recipes\recipes_200.json" />
-    <None Include="Recipes\recipes_217.json" />
-    <None Include="Recipes\recipes_232.json" />
-    <None Include="Recipes\recipes_339.json" />
-    <None Include="Recipes\recipes_380.json" />
-    <None Include="Recipes\recipes_402.json" />
-    <None Include="Recipes\recipes_479.json" />
-    <None Include="Recipes\recipes_99.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />

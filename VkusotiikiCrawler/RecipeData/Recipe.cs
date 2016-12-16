@@ -14,8 +14,8 @@ namespace VkusotiikiCrawler
         public readonly static string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
             "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
         public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
-        "свинско", "суджук", "филе"};
-        public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал" };
+        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюште"};
+        public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
 
         [JsonProperty("title")]
         public string Title { get; set; }
@@ -94,12 +94,14 @@ namespace VkusotiikiCrawler
             if (Title != null)
             {
                 string pattern1 = @"(\r\n)*";
-                string pattern2 = @"( )*(\d)*$";
+                string pattern2 = @"(\d)?( )*(\d)*$";
                 string replacement = "";
                 Regex rgx1 = new Regex(pattern1);
                 Regex rgx2 = new Regex(pattern2);
                 Title = rgx1.Replace(Title, replacement);
                 Title = rgx2.Replace(Title, replacement);
+                Title = Title.TrimStart(' ');
+                Title = Title.TrimEnd(' ');
             }
         }
     }
