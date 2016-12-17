@@ -27,15 +27,18 @@ namespace VkusotiikiCrawler
 
         static void Main(string[] args)
         {
+            // Кюфтета с тиквички и два вида сос
             IRecipeWebsite recipeWebsite = new KulinarBg();
             VkusotiikiCrawler crawler = new VkusotiikiCrawler(recipeWebsite);
             //crawler.RunCrawler(RECIPES_COUNT_LIMIT);
             crawler.RunCrawler();
+            //TestSmth();
         }
 
         private static void TestSmth()
         {
-
+            //Recipe recipe = new Recipe();
+            //recipe.FixRecipeProblems();
         }
     }
 }

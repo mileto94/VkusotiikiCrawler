@@ -65,7 +65,7 @@ namespace VkusotiikiCrawler
                     }
                     newRecipe.Duration = recipeDuration;
                     newRecipe.Servings = Int32.Parse(recipeServings);
-
+                    newRecipe.FixRecipeProblems();
                     recipes.Add(newRecipe);
                 }
                 else

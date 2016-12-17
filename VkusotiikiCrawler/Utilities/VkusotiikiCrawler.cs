@@ -41,10 +41,27 @@ namespace VkusotiikiCrawler
             Recipes = manager.ReadRecipes();
             InitiateCrawler();
             StartCrawler();
+            //FixRecipes();
+            //TrimRecipes();
             if (initialRecipesCount != Recipes.Count())
             {
                 manager.WriteRecipes(Recipes);
             }
+        }
+
+        private void FixRecipes()
+        {
+            foreach (var item in Recipes)
+            {
+                item.FixRecipeProblems();
+            }
+        }
+
+        private void TrimRecipes()
+        {
+            List<Recipe> recipesToRemove = new List<Recipe>();
+            recipesToRemove = Recipes.Where(t => Recipe.FORBIDDEN_TITLES.Any(s => t.Title.ToLower().Contains(s))).ToList();
+            Recipes.RemoveAll(t => recipesToRemove.Contains(t));
         }
 
         public void StartCrawler()

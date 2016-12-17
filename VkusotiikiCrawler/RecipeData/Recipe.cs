@@ -14,18 +14,22 @@ namespace VkusotiikiCrawler
         public readonly static string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
             "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
         public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
-        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюште"};
+        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюште", "говеждо"};
         public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
-        public readonly static string[] FORBIDDEN_TITLES = new string[] { "италиан", "турск", "индий", "паста", "спагети", "палачинк"};
+        public readonly static string[] FORBIDDEN_TITLES = new string[] { "италиан", "турск", "индий", "паста", "спагети", "палачинк",
+        "англий", "арабск", "макарон", "спагети", "грузинск", "мъфин", "джинджифил", "сандвич", "пудинг", "торта", "кекс", "топено",
+        "сладолед", "немски", "африкански", "рикота", "талиатели", "бутер", "болонезе", "ризото", "бургер", "пай", "пица", "фъстъч",
+        "крутон", "шербет", "борш", "равиоли", "шницел", "китайск", "тако", "чоризо", "бишкот", "средиземноморск", "холандск", "коктейл",
+        "мезе", "дип", "песто", "япон", "чийзкейк", "разядк", "фъдж", "тарт", "трюфел", "манго"};
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         [JsonProperty("instructions")]
-        public string Instructions { get; set; }
+        public string Instructions { get; set; } = "";
 
         [JsonProperty("duration")]
-        public string Duration { get; set; }
+        public string Duration { get; set; } = "0";
 
         [JsonProperty("ingredients")]
         public List<Ingredient> Ingredients { get; set; }
@@ -42,12 +46,17 @@ namespace VkusotiikiCrawler
         public Recipe()
         {
             Ingredients = new List<Ingredient>();
-            FindAlergies();
-            FindDifficulty();
-            TrimTitle();
         }
 
-        public void FindAlergies()
+        public void FixRecipeProblems()
+        {
+            FixInstructions();
+            TrimTitle();
+            FindAlergies();
+            FindDifficulty();
+        }
+
+        private void FindAlergies()
         {
             foreach (var ingredientName in Ingredients)
             {
@@ -65,7 +74,7 @@ namespace VkusotiikiCrawler
             }
         }
 
-        public void FindDifficulty()
+        private void FindDifficulty()
         {
             int ingredientsCount = Ingredients.Count;
             if (ingredientsCount <= 5)
@@ -90,7 +99,7 @@ namespace VkusotiikiCrawler
             }
         }
 
-        public void TrimTitle()
+        private void TrimTitle()
         {
             if (Title != null)
             {
@@ -104,6 +113,19 @@ namespace VkusotiikiCrawler
                 Title = Title.TrimStart(' ');
                 Title = Title.TrimEnd(' ');
             }
+        }
+
+        private void FixInstructions()
+        {
+            // todo: add the same for : , - (&ndash;) etc
+            string pattern1 = @"\.\s?";
+            string replacement1 = ". ";
+            string pattern2 = @"!\s?";
+            string replacement2 = "! ";
+            Regex rgx1 = new Regex(pattern1);
+            Instructions = rgx1.Replace(Instructions, replacement1);
+            Regex rgx2 = new Regex(pattern2);
+            Instructions = rgx2.Replace(Instructions, replacement2);
         }
     }
 }
