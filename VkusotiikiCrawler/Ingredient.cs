@@ -7,16 +7,28 @@ using System.Threading.Tasks;
 
 namespace VkusotiikiCrawler
 {
-    class Ingredient
+    public class Ingredient
     {
+        public static readonly string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
+            "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
+        public static readonly string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
+        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюфте", "говеждо"};
+        public static readonly string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
+
         [JsonProperty("name")]
         public string Name { get; set; }
+
         [JsonProperty("quantity")]
         public string Quantity { get; set; }
+
         [JsonProperty("unit")]
         public string Unit { get; set; }
+
         [JsonProperty("unstructured_data")]
         public string UnstructuredData { get; set; }
+
+        [JsonProperty("is_allergic")]
+        public bool IsAllergic { get; set; } = false;
 
         public Ingredient()
         {
@@ -45,6 +57,23 @@ namespace VkusotiikiCrawler
             }
 
             UnstructuredData = ingredients;
+            FindAlergies();
+        }
+
+
+        private void FindAlergies()
+        {
+            foreach (var item in Name.Split(' '))
+            {
+                foreach (var allergy in OTHER_ALERGIES.Concat(MEAT).Concat(DAIRY))
+                {
+                    if (item.StartsWith(allergy))
+                    {
+                        IsAllergic = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace VkusotiikiCrawler
 {
     public class VkusotiikiCrawler
     {
-        public const string JSON_FILE_PATH = @"../../Recipes/new/recipes_609.json";
+        public const string JSON_FILE_PATH = @"../../Recipes/new/recipes.json";
 
         public List<Recipe> Recipes { get; set; }
 

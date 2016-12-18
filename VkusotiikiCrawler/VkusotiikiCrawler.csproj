@@ -41,6 +41,10 @@
       <HintPath>..\packages\AngleSharp.0.9.8.1\lib\net45\AngleSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AustinHarris.JsonRpc, Version=1.1.63.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AustinHarris.JsonRpc.1.1.63\lib\net40\AustinHarris.JsonRpc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +85,8 @@
   <ItemGroup>
     <Compile Include="RecipeData\Ingredient.cs" />
     <Compile Include="Interfaces\IRecipeWebsite.cs" />
+    <Compile Include="Utilities\CrawlerRecipesService.cs" />
+    <Compile Include="Utilities\DatabaseCommunicator.cs" />
     <Compile Include="Utilities\JSONManager.cs" />
     <Compile Include="RecipeWebsites\KulinarBg.cs" />
     <Compile Include="Program.cs" />
@@ -119,7 +125,6 @@
     <None Include="Recipes\old2\recipes_551.json" />
     <None Include="Recipes\old2\recipes_618.json" />
     <None Include="Recipes\old2\recipes_618_refined.json" />
-    <None Include="Recipes\recipes.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />

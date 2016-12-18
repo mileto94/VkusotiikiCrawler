@@ -11,11 +11,6 @@ namespace VkusotiikiCrawler
     public class Recipe
     {
         //public static readonly char[] TRIM_CHRACTERS = new char[3] { ' ', '\r', '\n' };
-        public readonly static string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
-            "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
-        public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
-        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюфте", "говеждо"};
-        public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
         public readonly static string[] FORBIDDEN_TITLES = new string[] { "италиан", "турск", "индий", "паста", "спагети", "палачинк",
         "англий", "арабск", "макарон", "спагети", "грузинск", "мъфин", "джинджифил", "сандвич", "пудинг", "торта", "кекс", "топено",
         "сладолед", "немски", "африка", "рикота", "талиатели", "бутер", "болонезе", "ризото", "бургер", "пай", "пица", "фъстъч",
@@ -37,9 +32,6 @@ namespace VkusotiikiCrawler
 
         [JsonProperty("ingredients")]
         public List<Ingredient> Ingredients { get; set; }
-
-        [JsonProperty("is_allergic")]
-        public bool IsAllergic { get; set; } = false;
 
         [JsonProperty("difficulty")]
         public int Difficulty { get; set; } = 1;
@@ -70,24 +62,6 @@ namespace VkusotiikiCrawler
             TrimTitle();
             FindAlergies();
             FindDifficulty();
-        }
-
-        private void FindAlergies()
-        {
-            foreach (var ingredientName in Ingredients)
-            {
-                foreach (var item in ingredientName.Name.Split(' '))
-                {
-                    foreach (var allergy in OTHER_ALERGIES.Concat(MEAT).Concat(DAIRY))
-                    {
-                        if (item.StartsWith(allergy))
-                        {
-                            IsAllergic = true;
-                            break;
-                        }
-                    }
-                }
-            }
         }
 
         private void FindDifficulty()
@@ -128,6 +102,25 @@ namespace VkusotiikiCrawler
                 Name = rgx2.Replace(Name, replacement);
                 Name = Name.TrimStart(' ');
                 Name = Name.TrimEnd(' ');
+            }
+        }
+
+        private void FindAlergies()
+        {
+            foreach (var ingredient in Ingredients)
+            {
+                foreach (var item in ingredient.Name.Split(' '))
+                {
+                    foreach (var allergy in Ingredient.OTHER_ALERGIES.
+                        Concat(Ingredient.MEAT).Concat(Ingredient.DAIRY))
+                    {
+                        if (item.StartsWith(allergy))
+                        {
+                            ingredient.IsAllergic = true;
+                            break;
+                        }
+                    }
+                }
             }
         }
 
