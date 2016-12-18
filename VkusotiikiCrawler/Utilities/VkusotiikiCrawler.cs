@@ -11,7 +11,7 @@ namespace VkusotiikiCrawler
 {
     public class VkusotiikiCrawler
     {
-        public const string JSON_FILE_PATH = @"../../Recipes/recipes.json";
+        public const string JSON_FILE_PATH = @"../../Recipes/new/recipes_609.json";
 
         public List<Recipe> Recipes { get; set; }
 
@@ -32,6 +32,9 @@ namespace VkusotiikiCrawler
             {
                 RunCrawler();
             }
+
+            FixRecipes();
+            TrimRecipes();
         }
 
         public void RunCrawler()
@@ -60,7 +63,7 @@ namespace VkusotiikiCrawler
         private void TrimRecipes()
         {
             List<Recipe> recipesToRemove = new List<Recipe>();
-            recipesToRemove = Recipes.Where(t => Recipe.FORBIDDEN_TITLES.Any(s => t.Title.ToLower().Contains(s))).ToList();
+            recipesToRemove = Recipes.Where(t => Recipe.FORBIDDEN_TITLES.Any(s => t.Name.ToLower().Contains(s))).ToList();
             Recipes.RemoveAll(t => recipesToRemove.Contains(t));
         }
 

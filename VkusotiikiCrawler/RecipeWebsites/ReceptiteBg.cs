@@ -35,8 +35,8 @@ namespace VkusotiikiCrawler
 
 
                 Recipe newRecipe = new Recipe();
-                newRecipe.Title = recipeName;
-                newRecipe.Instructions = recipeInstructions;
+                newRecipe.Name = recipeName;
+                newRecipe.Description = recipeInstructions;
                 foreach (var item in recipeIngredients)
                 {
                     newRecipe.Ingredients.Add(new Ingredient(item));

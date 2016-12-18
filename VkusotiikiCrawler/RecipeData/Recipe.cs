@@ -14,19 +14,23 @@ namespace VkusotiikiCrawler
         public readonly static string[] OTHER_ALERGIES = new string[] {"ядки", "орех", "лешни", "сусам", "фъстъ", "кашу", "бадем",
             "кестен", "шам-фъстъ", "соя", "пшени", "500", "горчица",  "целина" };
         public readonly static string[] MEAT = new string[] { "риба", "скумри", "шаран", "рибн", "кайма", "телешко", "овчо", "агнешко",
-        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюште", "говеждо"};
+        "свинско", "суджук", "филе", "заеш", "месо", "кайма", "кренвирш", "кюфте", "говеждо"};
         public readonly static string[] DAIRY = new string[] { "мляко", "млечн", "майонеза", "мед", "яйц", "сирене", "кашкавал", "масло" };
         public readonly static string[] FORBIDDEN_TITLES = new string[] { "италиан", "турск", "индий", "паста", "спагети", "палачинк",
         "англий", "арабск", "макарон", "спагети", "грузинск", "мъфин", "джинджифил", "сандвич", "пудинг", "торта", "кекс", "топено",
-        "сладолед", "немски", "африкански", "рикота", "талиатели", "бутер", "болонезе", "ризото", "бургер", "пай", "пица", "фъстъч",
+        "сладолед", "немски", "африка", "рикота", "талиатели", "бутер", "болонезе", "ризото", "бургер", "пай", "пица", "фъстъч",
         "крутон", "шербет", "борш", "равиоли", "шницел", "китайск", "тако", "чоризо", "бишкот", "средиземноморск", "холандск", "коктейл",
-        "мезе", "дип", "песто", "япон", "чийзкейк", "разядк", "фъдж", "тарт", "трюфел", "манго"};
+        "мезе", "дип", "песто", "япон", "чийзкейк", "разядк", "фъдж", "тарт", "трюфел", "манго", "гуакамоле", "лазаня", "испан", "сироп",
+        "глазура", "пастет", "карпачо", "ролца", "руло", "бисквити", "джейми", "пунш", "мармалад", "тайланд", "целувк", " тост", "руски",
+        "скарид", "авокадо", "дюнер", "годжи", "шведск", "ирланд", "индия", "фрикасе", "суши", "ананас", "гофрет", "халва", "сорбе", "кокос",
+        "киш", "канелон", "бонбон", "баклав", "аспержи", "филипин", "брускет", "хапки", "ориенталск", "кебап", "синьо", "мус", "тарталет",
+        "брауни", "немск", "моцарела", "пармезан"};
 
-        [JsonProperty("title")]
-        public string Title { get; set; } = "";
+        [JsonProperty("name")]
+        public string Name { get; set; } = "";
 
-        [JsonProperty("instructions")]
-        public string Instructions { get; set; } = "";
+        [JsonProperty("description")]
+        public string Description { get; set; } = "";
 
         [JsonProperty("duration")]
         public string Duration { get; set; } = "0";
@@ -42,6 +46,18 @@ namespace VkusotiikiCrawler
 
         [JsonProperty("servings")]
         public int Servings { get; set; } = 1;
+
+        [JsonProperty("user")]
+        public int User { get; set; } = 1;
+
+        [JsonProperty("category")]
+        public int Category { get; set; } = 1;
+
+        [JsonProperty("dish")]
+        public int Dish { get; set; } = 1;
+
+        [JsonProperty("region")]
+        public int Region { get; set; } = 1;
 
         public Recipe()
         {
@@ -101,17 +117,17 @@ namespace VkusotiikiCrawler
 
         private void TrimTitle()
         {
-            if (Title != null)
+            if (Name != null)
             {
                 string pattern1 = @"(\r\n)*";
                 string pattern2 = @"(\d)?( )*(\d)*$";
                 string replacement = "";
                 Regex rgx1 = new Regex(pattern1);
                 Regex rgx2 = new Regex(pattern2);
-                Title = rgx1.Replace(Title, replacement);
-                Title = rgx2.Replace(Title, replacement);
-                Title = Title.TrimStart(' ');
-                Title = Title.TrimEnd(' ');
+                Name = rgx1.Replace(Name, replacement);
+                Name = rgx2.Replace(Name, replacement);
+                Name = Name.TrimStart(' ');
+                Name = Name.TrimEnd(' ');
             }
         }
 
@@ -123,9 +139,9 @@ namespace VkusotiikiCrawler
             string pattern2 = @"!\s?";
             string replacement2 = "! ";
             Regex rgx1 = new Regex(pattern1);
-            Instructions = rgx1.Replace(Instructions, replacement1);
+            Description = rgx1.Replace(Description, replacement1);
             Regex rgx2 = new Regex(pattern2);
-            Instructions = rgx2.Replace(Instructions, replacement2);
+            Description = rgx2.Replace(Description, replacement2);
         }
     }
 }

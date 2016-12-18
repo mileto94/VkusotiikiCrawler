@@ -53,12 +53,12 @@ namespace VkusotiikiCrawler
                 var recipeServingsElement = htmlAgilityPackDocument.DocumentNode.SelectNodes("//input[@class='fs24 openSans bold alignCenter colorDef']")?.First();
                 string recipeServings = recipeServingsElement?.GetAttributeValue("value", "1").Trim();
 
-                if (recipes.Where(s => s.Title == recipeName).Count() == 0 &&
-                        !Recipe.FORBIDDEN_TITLES.Any(s => recipeName.Contains(s)))
+                if (recipes.Where(s => recipeName.Contains(s.Name)).Count() == 0 &&
+                        !Recipe.FORBIDDEN_TITLES.Any(s => recipeName.ToLower().Contains(s)))
                 {
                     Recipe newRecipe = new Recipe();
-                    newRecipe.Title = recipeName;
-                    newRecipe.Instructions = recipeInstructions;
+                    newRecipe.Name = recipeName;
+                    newRecipe.Description = recipeInstructions;
                     foreach (var item in recipeIngredients)
                     {
                         newRecipe.Ingredients.Add(new Ingredient(item));

@@ -16,7 +16,7 @@ namespace VkusotiikiCrawler
     class Program
     {
         //private const string JSON_FILE_PATH = @"../../Recipes/recipes.json";
-        private const int RECIPES_COUNT_LIMIT = 1000;
+        private const int RECIPES_COUNT_LIMIT = 600;
 
         //static readonly char[] TRIM_CHRACTERS = new char[3] {' ', '\r', '\n' };
         //const string URL_PATH = "http://www.receptite.com/%D1%80%D0%B5%D1%86%D0%B5%D0%BF%D1%82%D0%B8-%D0%BE%D1%82/%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B0-%D0%BA%D1%83%D1%85%D0%BD%D1%8F";
@@ -27,7 +27,7 @@ namespace VkusotiikiCrawler
 
         static void Main(string[] args)
         {
-            // Кюфтета с тиквички и два вида сос
+            // Пиле жулиен със зеленчуци на фурна
             IRecipeWebsite recipeWebsite = new KulinarBg();
             VkusotiikiCrawler crawler = new VkusotiikiCrawler(recipeWebsite);
             //crawler.RunCrawler(RECIPES_COUNT_LIMIT);
