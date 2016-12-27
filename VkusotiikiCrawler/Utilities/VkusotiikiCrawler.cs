@@ -13,10 +13,11 @@ namespace VkusotiikiCrawler
     {
         public const string JSON_FILE_PATH = @"../../Recipes/new/recipes.json";
 
-        public List<Recipe> Recipes { get; set; }
+        public static List<Recipe> Recipes { get; set; }
 
         private string _URLPath;
         private PoliteWebCrawler _crawler;
+        private RecipesFixer _recipesFixer;
         private IRecipeWebsite _recipeWebsite;
 
         public VkusotiikiCrawler(IRecipeWebsite recipeWebsite)
@@ -24,6 +25,7 @@ namespace VkusotiikiCrawler
             _recipeWebsite = recipeWebsite;
             _URLPath = recipeWebsite.GetURLPath();
             Recipes = new List<Recipe>();
+            _recipesFixer = new RecipesFixer();
         }
 
         public void RunCrawler(int recipesCount)
@@ -33,8 +35,8 @@ namespace VkusotiikiCrawler
                 RunCrawler();
             }
 
-            FixRecipes();
-            TrimRecipes();
+            _recipesFixer.FixRecipes(Recipes);
+            _recipesFixer.TrimRecipes(Recipes);
         }
 
         public void RunCrawler()
@@ -42,29 +44,14 @@ namespace VkusotiikiCrawler
             int initialRecipesCount = Recipes.Count();
             JSONManager manager = new JSONManager(JSON_FILE_PATH);
             Recipes = manager.ReadRecipes();
-            InitiateCrawler();
-            StartCrawler();
-            //FixRecipes();
-            //TrimRecipes();
+            //InitiateCrawler();
+            //StartCrawler();
+            //_recipesFixer.FixRecipes(Recipes);
+            //_recipesFixer.TrimRecipes(Recipes);
             if (initialRecipesCount != Recipes.Count())
             {
                 manager.WriteRecipes(Recipes);
             }
-        }
-
-        private void FixRecipes()
-        {
-            foreach (var item in Recipes)
-            {
-                item.FixRecipeProblems();
-            }
-        }
-
-        private void TrimRecipes()
-        {
-            List<Recipe> recipesToRemove = new List<Recipe>();
-            recipesToRemove = Recipes.Where(t => Recipe.FORBIDDEN_TITLES.Any(s => t.Name.ToLower().Contains(s))).ToList();
-            Recipes.RemoveAll(t => recipesToRemove.Contains(t));
         }
 
         public void StartCrawler()

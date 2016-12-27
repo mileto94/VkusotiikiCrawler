@@ -27,11 +27,12 @@ namespace VkusotiikiCrawler
 
         static void Main(string[] args)
         {
-            // Пиле жулиен със зеленчуци на фурна
+            // Пилешки крилца с маслини и печени чушки
             IRecipeWebsite recipeWebsite = new KulinarBg();
             VkusotiikiCrawler crawler = new VkusotiikiCrawler(recipeWebsite);
-            //crawler.RunCrawler(RECIPES_COUNT_LIMIT);
             crawler.RunCrawler();
+            GetJsonRpcRequests();
+            //crawler.RunCrawler(RECIPES_COUNT_LIMIT);
             //TestSmth();
         }
 
@@ -39,6 +40,17 @@ namespace VkusotiikiCrawler
         {
             //Recipe recipe = new Recipe();
             //recipe.FixRecipeProblems();
+            //string str = "Еклери";
+            //bool valid = Recipe.FORBIDDEN_TITLES.Any(s => str.ToLower().Contains(s));
+        }
+
+        private static void GetJsonRpcRequests()
+        {
+            CrawlerRecipesService service = new CrawlerRecipesService();
+            string ipAddress = "127.0.0.1";
+            int port = 3333;
+            DatabaseCommunicator communicator = new DatabaseCommunicator(ipAddress, port, service);
+            communicator.ConnectToDatabase();
         }
     }
 }
