@@ -44,8 +44,8 @@ namespace VkusotiikiCrawler
             int initialRecipesCount = Recipes.Count();
             JSONManager manager = new JSONManager(JSON_FILE_PATH);
             Recipes = manager.ReadRecipes();
-            //InitiateCrawler();
-            //StartCrawler();
+            InitiateCrawler();
+            StartCrawler();
             //_recipesFixer.FixRecipes(Recipes);
             //_recipesFixer.TrimRecipes(Recipes);
             if (initialRecipesCount != Recipes.Count())

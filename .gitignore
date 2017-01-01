@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # Collected recipe
 /VkusotiikiCrawler/Recipes
+
+# Backups
+/backup

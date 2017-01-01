@@ -41,10 +41,6 @@
       <HintPath>..\packages\AngleSharp.0.9.8.1\lib\net45\AngleSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AustinHarris.JsonRpc, Version=1.1.63.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AustinHarris.JsonRpc.1.1.63\lib\net40\AustinHarris.JsonRpc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -81,14 +77,18 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Thrift, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ApacheThrift.0.9.3\lib\Thrift.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseCommunication\CrawlerRecipesService.cs" />
+    <Compile Include="DatabaseCommunication\ThriftServer.cs" />
     <Compile Include="Interfaces\ICrawlerRecipesService.cs" />
-    <Compile Include="DatabaseCommunication\SocketListener.cs" />
     <Compile Include="RecipeData\Ingredient.cs" />
     <Compile Include="Interfaces\IRecipeWebsite.cs" />
-    <Compile Include="DatabaseCommunication\CrawlerRecipesService.cs" />
-    <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
+    <Compile Include="DatabaseCommunication\ThriftRecipesService.cs" />
     <Compile Include="Utilities\JSONManager.cs" />
     <Compile Include="RecipeWebsites\KulinarBg.cs" />
     <Compile Include="Program.cs" />

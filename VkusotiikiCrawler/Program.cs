@@ -1,12 +1,9 @@
-﻿using Abot.Crawler;
-using Abot.Poco;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -31,7 +28,15 @@ namespace VkusotiikiCrawler
             IRecipeWebsite recipeWebsite = new KulinarBg();
             VkusotiikiCrawler crawler = new VkusotiikiCrawler(recipeWebsite);
             crawler.RunCrawler();
-            GetJsonRpcRequests();
+            //string ipAddress = "127.0.0.1";
+            string ipAddress = "192.168.0.108";
+            int port = 9090;
+            if (args.Count() != 0)
+            {
+                ipAddress = args[0];
+                port = Int32.Parse(args[1]);
+            }
+            GetJsonRpcRequests(ipAddress, port);
             //crawler.RunCrawler(RECIPES_COUNT_LIMIT);
             //TestSmth();
         }
@@ -44,13 +49,13 @@ namespace VkusotiikiCrawler
             //bool valid = Recipe.FORBIDDEN_TITLES.Any(s => str.ToLower().Contains(s));
         }
 
-        private static void GetJsonRpcRequests()
+        private static void GetJsonRpcRequests(string ipAddress, int port)
         {
-            CrawlerRecipesService service = new CrawlerRecipesService();
-            string ipAddress = "127.0.0.1";
-            int port = 3333;
-            DatabaseCommunicator communicator = new DatabaseCommunicator(ipAddress, port, service);
-            communicator.ConnectToDatabase();
+            //CrawlerRecipesService service = new CrawlerRecipesService();
+            //DatabaseCommunicator communicator = new DatabaseCommunicator(ipAddress, port, service);
+            //communicator.ConnectToDatabase();
+            var server = new ThriftServer(ipAddress, port);
+            server.Start();
         }
     }
 }

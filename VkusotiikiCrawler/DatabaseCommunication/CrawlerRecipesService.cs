@@ -1,5 +1,4 @@
-﻿using AustinHarris.JsonRpc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace VkusotiikiCrawler
 {
-    public class CrawlerRecipesService : JsonRpcService, ICrawlerRecipesService
+    public class CrawlerRecipesService : ThriftRecipesService.Iface, ICrawlerRecipesService
     {
-        [JsonRpcMethod]
         public string GetRecipeData()
         {
             var recipesToJson = JsonConvert.SerializeObject(VkusotiikiCrawler.Recipes);
