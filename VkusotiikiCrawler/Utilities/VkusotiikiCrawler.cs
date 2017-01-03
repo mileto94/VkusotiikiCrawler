@@ -11,7 +11,7 @@ namespace VkusotiikiCrawler
 {
     public class VkusotiikiCrawler
     {
-        public const string JSON_FILE_PATH = @"../../Recipes/new/recipes.json";
+        public const string JSON_FILE_PATH = @"recipes.json";
 
         public static List<Recipe> Recipes { get; set; }
 
@@ -44,8 +44,10 @@ namespace VkusotiikiCrawler
             int initialRecipesCount = Recipes.Count();
             JSONManager manager = new JSONManager(JSON_FILE_PATH);
             Recipes = manager.ReadRecipes();
-            InitiateCrawler();
-            StartCrawler();
+			//uncomment these 2 to start crawling !!!
+            //InitiateCrawler();
+            //StartCrawler();
+
             //_recipesFixer.FixRecipes(Recipes);
             //_recipesFixer.TrimRecipes(Recipes);
             if (initialRecipesCount != Recipes.Count())

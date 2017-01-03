@@ -28,8 +28,8 @@ namespace VkusotiikiCrawler
             IRecipeWebsite recipeWebsite = new KulinarBg();
             VkusotiikiCrawler crawler = new VkusotiikiCrawler(recipeWebsite);
             crawler.RunCrawler();
-            //string ipAddress = "127.0.0.1";
-            string ipAddress = "192.168.0.108";
+            string ipAddress = "127.0.0.1";
+            //string ipAddress = "192.168.0.108";
             int port = 9090;
             if (args.Count() != 0)
             {
